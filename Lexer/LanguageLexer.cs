@@ -32,10 +32,6 @@ namespace FeuDumScript.Lexer
 
         public List<LexerToken> Parse()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Initial code: ");
-            Console.ResetColor(); 
-            Console.WriteLine(_sourceCode);
             while (ParseNextToken(out var token))
             {
                 if (token != null)
@@ -44,10 +40,6 @@ namespace FeuDumScript.Lexer
                     _position += token.Value.Length;
                 }
             }
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Lexer result: ");
-            Console.ResetColor();
-            Console.WriteLine(string.Join("\n", _tokens));
             return _tokens;
         }
 
