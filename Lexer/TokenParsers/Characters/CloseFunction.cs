@@ -2,7 +2,7 @@
 {
     internal class CloseFunctionTokenParser : CharacterTokenParser
     {
-        public override LexerTokenType TokenType => LexerTokenType.OpenFunction;
+        public override LexerTokenType TokenType => LexerTokenType.CloseFunction;
 
         protected override char Char => ')';
     }
