@@ -1,4 +1,4 @@
-﻿using FeuDumScript.Lexer;
+﻿using FeuDumScript.Parser;
 
 namespace FeuDumScript
 {
@@ -6,9 +6,10 @@ namespace FeuDumScript
     {
         static void Main(string[] args)
         {
-            LanguageLexer lexer = new("testString = \"Test\"; Console.WriteLine(`test`);");
-            var result = lexer.Parse();
-            Console.WriteLine(string.Join("\n", result));
+            string code = "testString = 'sas' + 1; printf('sas'); printf(testString);";
+            LanguageParser parser = new(code);
+            var tree =  parser.ParseCode();
+            Console.WriteLine(tree);
         }
     }
 }
