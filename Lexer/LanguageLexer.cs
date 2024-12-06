@@ -1,6 +1,4 @@
-﻿using FeuDumScript.Lexer.TokenParsers;
-
-namespace FeuDumScript.Lexer
+﻿namespace FeuDumScript.Lexer
 {
     internal class LanguageLexer
     {
@@ -8,13 +6,8 @@ namespace FeuDumScript.Lexer
 
         static LanguageLexer()
         {
-            Parsers = [
-                new AssignmentTokenParser(),
-                new MathOperationsTokenParser(),
-                new NameTokenParser(),
-                new NumberTokenParser(),
-                new StringTokenParser(),
-                ];
+            Parsers = [];
+            Utils.FillInterfaceCollection(ref Parsers);
         }
 
         private readonly List<LexerToken> _tokens;

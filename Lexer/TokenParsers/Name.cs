@@ -4,7 +4,7 @@
     {
         public LexerTokenType TokenType => LexerTokenType.Name;
 
-        private const string ALPHABET = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM";
+        private const string ALPHABET = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM_";
 
         public bool TryParse(string code, out string? value)
         {

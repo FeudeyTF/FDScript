@@ -7,6 +7,8 @@
         EndOfLine,
         Number,
         String,
-        Assignment
+        Assignment,
+        OpenFunction,
+        CloseFunction,
     }
 }
