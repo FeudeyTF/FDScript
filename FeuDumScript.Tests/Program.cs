@@ -1,6 +1,4 @@
-﻿using FeuDumScript.Parser;
-
-namespace FeuDumScript
+﻿namespace FeuDumScript.Tests
 {
     internal class Program
     {
@@ -8,7 +6,7 @@ namespace FeuDumScript
         {
             string code = "testString = 'sas' + 1; printf('sas'); printf(testString);";
             LanguageParser parser = new(code);
-            var tree =  parser.ParseCode();
+            var tree = parser.ParseCode();
             Console.WriteLine(tree);
         }
     }
