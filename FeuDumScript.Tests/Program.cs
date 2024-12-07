@@ -1,11 +1,12 @@
-﻿namespace FeuDumScript.Tests
+﻿using FeuDumScript.Parser;
+
+namespace FeuDumScript.Tests
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            string code = "testString = 'sas' + 1; printf('sas'); printf(testString);";
-            LanguageParser parser = new(code);
+            LanguageParser parser = new("testName='sas';");
             var tree = parser.ParseCode();
             Console.WriteLine(tree);
         }

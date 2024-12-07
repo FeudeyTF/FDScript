@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeuDumScript", "FeuDumScript\FeuDumScript.csproj", "{A661F2F3-1800-4C63-88B6-E6A8A4EB0CE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeuDumScript.Tests", "FeuDumScript.Tests\FeuDumScript.Tests.csproj", "{826CFC7B-5192-4D40-BF0D-F4E702E1322F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeuDumScript.Tests", "FeuDumScript.Tests\FeuDumScript.Tests.csproj", "{2A10AF20-EA66-4324-9EFD-7C7F86736E31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{A661F2F3-1800-4C63-88B6-E6A8A4EB0CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A661F2F3-1800-4C63-88B6-E6A8A4EB0CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A661F2F3-1800-4C63-88B6-E6A8A4EB0CE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{826CFC7B-5192-4D40-BF0D-F4E702E1322F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{826CFC7B-5192-4D40-BF0D-F4E702E1322F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{826CFC7B-5192-4D40-BF0D-F4E702E1322F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{826CFC7B-5192-4D40-BF0D-F4E702E1322F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A10AF20-EA66-4324-9EFD-7C7F86736E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A10AF20-EA66-4324-9EFD-7C7F86736E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A10AF20-EA66-4324-9EFD-7C7F86736E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A10AF20-EA66-4324-9EFD-7C7F86736E31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

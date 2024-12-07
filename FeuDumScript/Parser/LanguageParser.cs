@@ -5,13 +5,13 @@ using FeuDumScript.Parser.AbstractSyntaxTree.Nodes;
 
 namespace FeuDumScript.Parser
 {
-    internal class LanguageParser
+    public class LanguageParser
     {
-        private List<LexerToken> _tokens;
+        private readonly List<LexerToken> _tokens;
+
+        private readonly LanguageLexer _lexer;
 
         private int _position;
-
-        private LanguageLexer _lexer;
 
         public LanguageParser(string code)
         {
@@ -21,7 +21,7 @@ namespace FeuDumScript.Parser
             _tokens = _lexer.Parse();
         }
 
-        public Node ParseExpressionPart()
+        private Node ParseExpressionPart()
         {
             if (GetNextToken(LexerTokenType.OpenFunction) != null)
             {
@@ -35,7 +35,7 @@ namespace FeuDumScript.Parser
             }
         }
 
-        public Node ParseObject()
+        private Node ParseObject()
         {
             var token = GetNextToken(LexerTokenType.Number, LexerTokenType.String, LexerTokenType.Name);
             if (token != null)
@@ -52,8 +52,8 @@ namespace FeuDumScript.Parser
             }
             throw new ExceptionAtLine("Invalid object!", _position);
         }
-        
-        public Node ParseExpression()
+
+        private Node ParseExpression()
         {
             var leftNode = ParseExpressionPart();
             var oper = GetNextToken(LexerTokenType.Operation);
@@ -67,7 +67,7 @@ namespace FeuDumScript.Parser
         }
 
 
-        public Node ParseLine()
+        private Node ParseLine()
         {
             var start = GetNextToken(LexerTokenType.Name);
             if (start != null)
@@ -110,7 +110,7 @@ namespace FeuDumScript.Parser
             return head;
         }
 
-        public LexerToken? GetNextToken(params List<LexerTokenType> requirements)
+        private LexerToken? GetNextToken(params List<LexerTokenType> requirements)
         {
             if (_position < _tokens.Count)
             {
@@ -124,7 +124,7 @@ namespace FeuDumScript.Parser
             return null;
         }
 
-        public LexerToken Require(params List<LexerTokenType> requirements)
+        private LexerToken Require(params List<LexerTokenType> requirements)
         {
             if (_position < _tokens.Count)
             {
