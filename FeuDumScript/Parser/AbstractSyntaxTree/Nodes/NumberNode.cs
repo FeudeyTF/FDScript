@@ -11,6 +11,6 @@ namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
             Number = number;
         }
 
-        public override string ToString() => Number.Value;
+        public override string ToString() => "(NUMBER)" + Number.Value;
     }
 }

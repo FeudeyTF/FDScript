@@ -66,6 +66,20 @@ namespace FeuDumScript.Parser
             return leftNode;
         }
 
+        private List<Node> ParseFunctionArguments(List<Node> args)
+        {
+            var node = ParseExpression();
+            args.Add(node);
+            var getNextToken = GetNextToken(LexerTokenType.Comma, LexerTokenType.CloseFunction);
+            if (getNextToken != null)
+            {
+                if (getNextToken.Type == LexerTokenType.CloseFunction)
+                    return args;
+                else
+                    return ParseFunctionArguments(args);
+            }
+            throw new ExceptionAtLine("Function arguments parse failed!", _position);
+        }
 
         private Node ParseLine()
         {
@@ -81,17 +95,9 @@ namespace FeuDumScript.Parser
                     }
                     else
                     {
-                        var token = GetNextToken(LexerTokenType.String);
-                        if (token != null)
-                        {
-                            Require(LexerTokenType.CloseFunction);
-                            return new UnarOperator(start.Value, new StringNode(token.Value));
-                        }
-                        else
-                        {
-                            _position--;
-                            return new UnarOperator(start.Value, ParseExpression());
-                        }
+                        List<Node> args = [];
+                        ParseFunctionArguments(args);
+                        return new FunctionNode(start.Value, args);
                     }
                 }
             }

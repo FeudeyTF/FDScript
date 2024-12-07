@@ -10,5 +10,6 @@
         Assignment,
         OpenFunction,
         CloseFunction,
+        Comma
     }
 }
