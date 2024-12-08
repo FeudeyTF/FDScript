@@ -1,4 +1,5 @@
-﻿namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
+﻿
+namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
 {
     internal class UnarOperator : Node
     {
@@ -11,6 +12,12 @@
             Operator = oper;
             Node = node;
         }
+
+        public override object? Run(List<Variable> variables)
+        {
+            return 0;
+        }
+
 
         public override string ToString() => Operator + "(" + Node + ")";
     }

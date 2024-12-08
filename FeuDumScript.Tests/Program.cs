@@ -13,14 +13,14 @@ namespace FeuDumScript.Tests
             {
                 if(file.EndsWith(FILE_EXTENSION))
                 {
+                    Console.WriteLine($"Found {Path.GetFileName(file)}!");
                     LanguageParser parser = new(File.ReadAllText(file));
-                    var tree = parser.ParseCode();
-                    Console.WriteLine(tree);
+                    var exitCode = parser.RunCode();
+                    Console.WriteLine("Program exit with code " + exitCode);
                     fileOpenedCounter++;
                 }
             }
 
-            Console.WriteLine($"Found {fileOpenedCounter} files!");
             while(true)
             {
                 var command = Console.ReadLine();

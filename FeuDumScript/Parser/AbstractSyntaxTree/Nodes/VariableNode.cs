@@ -1,4 +1,5 @@
-﻿namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
+﻿
+namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
 {
     internal class VariableNode : Node
     {
@@ -9,6 +10,15 @@
             Name = name;
         }
 
-        public override string ToString() => Name;
+        public override object? Run(List<Variable> variables)
+        {
+            foreach (var variable in variables)
+                if (variable.Name == Name)
+                    return variable.Value;
+            variables.Add(new(Name, default));
+            return default;
+        }
+
+        public override string ToString() => "(VAR)" + Name;
     }
 }

@@ -30,9 +30,7 @@ namespace FeuDumScript.Parser
                 return node;
             }
             else
-            {
                 return ParseObject();
-            }
         }
 
         private Node ParseObject()
@@ -45,6 +43,8 @@ namespace FeuDumScript.Parser
                     case LexerTokenType.Number:
                         return new NumberNode(token);
                     case LexerTokenType.Name:
+                        if (GetNextToken(LexerTokenType.OpenFunction) != null)
+                            return ParseFunctionCall(token.Value);
                         return new VariableNode(token.Value);
                     case LexerTokenType.String:
                         return new StringNode(token.Value);
@@ -95,16 +95,23 @@ namespace FeuDumScript.Parser
                     }
                     else
                     {
-                        List<Node> args = [];
-                        ParseFunctionArguments(args);
-                        return new FunctionNode(start.Value, args);
+                        return ParseFunctionCall(start.Value);
                     }
                 }
             }
             throw new ExceptionAtLine("You need to invoke method or assign variable!",  _position);
         }
 
-        public Node ParseCode()
+        private FunctionCallNode ParseFunctionCall(string name)
+        {
+            if (GetNextToken(LexerTokenType.CloseFunction) != null)
+                return new FunctionCallNode(name, []);
+            List<Node> args = [];
+            ParseFunctionArguments(args);
+            return new FunctionCallNode(name, args);
+        }
+
+        private HeadNode ParseCode()
         {
             HeadNode head = new();
             while(_position < _tokens.Count)
@@ -114,6 +121,13 @@ namespace FeuDumScript.Parser
                 head.Nodes.Add(lineNode);
             }
             return head;
+        }
+
+        public int RunCode()
+        {
+            List<Variable> variables = [];
+            var parsed = ParseCode();
+            return (int)parsed.Run(variables);
         }
 
         private LexerToken? GetNextToken(params List<LexerTokenType> requirements)

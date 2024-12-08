@@ -11,6 +11,11 @@ namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
             Number = number;
         }
 
+        public override object? Run(List<Variable> variables)
+        {
+            return int.Parse(Number.Value);
+        }
+
         public override string ToString() => "(NUMBER)" + Number.Value;
     }
 }

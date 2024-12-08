@@ -9,6 +9,13 @@
             Nodes = [];
         }
 
+        public override object Run(List<Variable> variables)
+        {
+            foreach (var node in Nodes)
+                node.Run(variables);
+            return 0;
+        }
+
         public override string ToString()
         {
             string result = string.Empty;
