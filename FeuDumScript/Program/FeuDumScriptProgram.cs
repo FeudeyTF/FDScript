@@ -1,4 +1,6 @@
-﻿namespace FeuDumScript.Program
+﻿using FeuDumScript.Program.Variables;
+
+namespace FeuDumScript.Program
 {
     public class FeuDumScriptProgram
     {

@@ -24,5 +24,24 @@ namespace FeuDumScript
                     }
                 }
         }
+
+        public static void FillClassCollection<TBase>(ref List<TBase> collection, Type[]? types = null, object[]? args = null)
+        {
+            types ??= [];
+            args ??= [];
+            var components = from type in Assembly.GetExecutingAssembly().GetTypes()
+                             where type.IsSubclassOf(typeof(TBase)) && !type.IsAbstract
+                             select type;
+            foreach (var type in components)
+            {
+                var constructor = type.GetConstructor(types);
+                if (constructor != null)
+                {
+                    TBase? component = (TBase)constructor.Invoke(args);
+                    if (component != null)
+                        collection.Add(component);
+                }
+            }
+        }
     }
 }

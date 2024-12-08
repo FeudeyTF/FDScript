@@ -1,4 +1,6 @@
-﻿namespace FeuDumScript.Lexer.TokenParsers
+﻿using FeuDumScript.Program.Variables;
+
+namespace FeuDumScript.Lexer.TokenParsers
 {
     internal class NameTokenParser : ILexerTokenParser
     {
@@ -8,21 +10,21 @@
 
         public bool TryParse(string code, out string? value)
         {
-            string variableName = "";
+            string name = "";
             if (!int.TryParse(code[0].ToString(), out _))
             {
                 for (int i = 0; i < code.Length; i++)
                 {
                     if (ALPHABET.Contains(code[i].ToString(), StringComparison.CurrentCultureIgnoreCase))
-                        variableName += code[i];
+                        name += code[i];
                     else
                         break;
                 }
             }
 
-            if (!string.IsNullOrEmpty(variableName))
+            if (!string.IsNullOrEmpty(name) && !VariableType.TYPES.Any(v => v.Name == name) && !BooleanTokenParser.STATES.Contains(name))
             {
-                value = variableName;
+                value = name;
                 return true;
             }
             else

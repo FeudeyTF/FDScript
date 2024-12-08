@@ -1,5 +1,7 @@
 ﻿using FeuDumScript.AbstractSyntaxTree;
 using FeuDumScript.AbstractSyntaxTree.Nodes;
+using FeuDumScript.AbstractSyntaxTree.Nodes.TypeNodes;
+using FeuDumScript.AbstractSyntaxTree.Nodes.Variables;
 using FeuDumScript.Exceptions;
 using FeuDumScript.Lexer;
 
@@ -35,7 +37,7 @@ namespace FeuDumScript
 
         private Node ParseObject()
         {
-            var token = GetNextToken(LexerTokenType.Number, LexerTokenType.String, LexerTokenType.Name);
+            var token = GetNextToken(LexerTokenType.Number, LexerTokenType.String, LexerTokenType.Name, LexerTokenType.Boolean);
             if (token != null)
             {
                 switch (token.Type)
@@ -45,9 +47,11 @@ namespace FeuDumScript
                     case LexerTokenType.Name:
                         if (GetNextToken(LexerTokenType.OpenFunction) != null)
                             return ParseFunctionCall(token.Value);
-                        return new VariableNode(token.Value);
+                        return new VariableCallNode(token.Value);
                     case LexerTokenType.String:
                         return new StringNode(token.Value);
+                    case LexerTokenType.Boolean:
+                        return new BooleanNode(token);
                 }
             }
             throw new ExceptionAtLine("Invalid object!", _position);
@@ -83,21 +87,30 @@ namespace FeuDumScript
 
         private Node ParseLine()
         {
-            var start = GetNextToken(LexerTokenType.Name);
-            if (start != null)
+            var typeToken = GetNextToken(LexerTokenType.Type);
+            if(typeToken != null)
             {
-                var nextToken = GetNextToken(LexerTokenType.Assignment, LexerTokenType.OpenFunction);
-                if(nextToken != null)
+                var variableName = Require(LexerTokenType.Name);
+                var isAssign = GetNextToken(LexerTokenType.Assignment);
+                if (isAssign != null)
+                    return new AssignmentNode(isAssign, new VariableDefineNode(variableName.Value, typeToken.Value), ParseExpression());
+                else
+                    return new VariableDefineNode(variableName.Value, typeToken.Value);
+            }
+            else
+            {
+                var name = GetNextToken(LexerTokenType.Name);
+                if(name != null)
                 {
-                    if (nextToken.Type == LexerTokenType.Assignment)
-                    {
-                        return new AssignmentNode(nextToken, new VariableNode(start.Value), ParseExpression());
-                    }
+                    if (GetNextToken(LexerTokenType.OpenFunction) != null)
+                        return ParseFunctionCall(name.Value);
                     else
                     {
-                        return ParseFunctionCall(start.Value);
+                        var assign = Require(LexerTokenType.Assignment);
+                        return new AssignmentNode(assign, new VariableCallNode(name.Value), ParseExpression());
                     }
                 }
+               
             }
             throw new ExceptionAtLine("You need to invoke method or assign variable!",  _position);
         }

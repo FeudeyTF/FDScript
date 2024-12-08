@@ -1,9 +1,11 @@
 ﻿using FeuDumScript.Program;
 
-namespace FeuDumScript.AbstractSyntaxTree.Nodes
+namespace FeuDumScript.AbstractSyntaxTree.Nodes.TypeNodes
 {
-    internal class StringNode : Node
+    internal class StringNode : TypeNode
     {
+        public override string TypeName => "string";
+
         public string Value { get; }
 
         public StringNode(string value)

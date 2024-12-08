@@ -1,10 +1,12 @@
 ﻿using FeuDumScript.Lexer;
 using FeuDumScript.Program;
 
-namespace FeuDumScript.AbstractSyntaxTree.Nodes
+namespace FeuDumScript.AbstractSyntaxTree.Nodes.TypeNodes
 {
-    internal class NumberNode : Node
+    internal class NumberNode : TypeNode
     {
+        public override string TypeName => "int";
+
         public LexerToken Number { get; }
 
         public NumberNode(LexerToken number)

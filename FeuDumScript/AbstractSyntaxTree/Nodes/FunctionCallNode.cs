@@ -1,4 +1,6 @@
-﻿using FeuDumScript.Program;
+﻿using FeuDumScript.AbstractSyntaxTree.Nodes.Variables;
+using FeuDumScript.Program;
+using FeuDumScript.Program.Variables;
 
 namespace FeuDumScript.AbstractSyntaxTree.Nodes
 {
@@ -16,10 +18,19 @@ namespace FeuDumScript.AbstractSyntaxTree.Nodes
 
         public override object? Run(FeuDumScriptProgram program)
         {
-            var args = Arguments.Select(a => a.Run(program)).ToList();
-            foreach (var arg in args)
-                if (arg == null)
-                    throw new Exception("The variable does't exists!");
+            List<object?> args = [];
+            foreach(var arg in Arguments)
+            {
+                var result = arg.Run(program) ?? throw new Exception("Some of argument is null!");
+                if (result is Variable var)
+                {
+                    if(var.Value == null)
+                        throw new Exception("Variable " + var.Name + " is null!");
+                    args.Add(var.Value);
+                }
+                else
+                    args.Add(result);
+            }
             switch (Name)
             {
                 case "printf":

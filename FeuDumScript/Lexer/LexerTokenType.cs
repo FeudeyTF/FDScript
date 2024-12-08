@@ -7,6 +7,8 @@
         EndOfLine,
         Number,
         String,
+        Boolean,
+        Type,
         Assignment,
         OpenFunction,
         CloseFunction,
