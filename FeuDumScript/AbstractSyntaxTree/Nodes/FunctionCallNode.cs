@@ -1,4 +1,6 @@
-﻿namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
+﻿using FeuDumScript.Program;
+
+namespace FeuDumScript.AbstractSyntaxTree.Nodes
 {
     internal class FunctionCallNode : Node
     {
@@ -12,9 +14,9 @@
             Arguments = arguments;
         }
 
-        public override object? Run(List<Variable> variables)
+        public override object? Run(FeuDumScriptProgram program)
         {
-            var args = Arguments.Select(a => a.Run(variables)).ToList();
+            var args = Arguments.Select(a => a.Run(program)).ToList();
             foreach (var arg in args)
                 if (arg == null)
                     throw new Exception("The variable does't exists!");

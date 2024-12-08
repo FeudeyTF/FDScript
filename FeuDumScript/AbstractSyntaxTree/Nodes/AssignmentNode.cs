@@ -1,6 +1,7 @@
 ﻿using FeuDumScript.Lexer;
+using FeuDumScript.Program;
 
-namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
+namespace FeuDumScript.AbstractSyntaxTree.Nodes
 {
     internal class AssignmentNode : Node
     {
@@ -14,10 +15,10 @@ namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
             RightNode = rightNode;
         }
 
-        public override object? Run(List<Variable> variables)
+        public override object? Run(FeuDumScriptProgram program)
         {
-            var result = RightNode.Run(variables);
-            foreach (var variable in variables)
+            var result = RightNode.Run(program);
+            foreach (var variable in program.Variables)
             {
                 if(variable.Name == LeftNode.Name)
                 {
@@ -25,7 +26,7 @@ namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
                     return result;
                 }
             }
-            variables.Add(new(LeftNode.Name, result));
+            program.Variables.Add(new(LeftNode.Name, result));
             return result;
         }
 

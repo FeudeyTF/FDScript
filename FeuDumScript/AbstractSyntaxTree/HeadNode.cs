@@ -1,4 +1,6 @@
-﻿namespace FeuDumScript.Parser.AbstractSyntaxTree
+﻿using FeuDumScript.Program;
+
+namespace FeuDumScript.AbstractSyntaxTree
 {
     internal class HeadNode : Node
     {
@@ -9,10 +11,10 @@
             Nodes = [];
         }
 
-        public override object Run(List<Variable> variables)
+        public override object Run(FeuDumScriptProgram program)
         {
             foreach (var node in Nodes)
-                node.Run(variables);
+                node.Run(program);
             return 0;
         }
 

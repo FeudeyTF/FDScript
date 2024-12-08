@@ -1,5 +1,6 @@
-﻿
-namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
+﻿using FeuDumScript.Program;
+
+namespace FeuDumScript.AbstractSyntaxTree.Nodes
 {
     internal class StringNode : Node
     {
@@ -10,7 +11,7 @@ namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
             Value = value;
         }
 
-        public override object? Run(List<Variable> variables)
+        public override object? Run(FeuDumScriptProgram program)
         {
             return Value.Replace("\"", "");
         }

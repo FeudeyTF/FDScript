@@ -1,4 +1,4 @@
-﻿using FeuDumScript.Parser;
+﻿using FeuDumScript.Program;
 
 namespace FeuDumScript.Tests
 {
@@ -14,8 +14,8 @@ namespace FeuDumScript.Tests
                 if(file.EndsWith(FILE_EXTENSION))
                 {
                     Console.WriteLine($"Found {Path.GetFileName(file)}!");
-                    LanguageParser parser = new(File.ReadAllText(file));
-                    var exitCode = parser.RunCode();
+                    FeuDumScriptProgram program = new();
+                    var exitCode = program.Execute(File.ReadAllText(file));
                     Console.WriteLine("Program exit with code " + exitCode);
                     fileOpenedCounter++;
                 }

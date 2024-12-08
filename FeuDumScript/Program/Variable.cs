@@ -1,4 +1,4 @@
-﻿namespace FeuDumScript.Parser
+﻿namespace FeuDumScript.Program
 {
     public class Variable
     {

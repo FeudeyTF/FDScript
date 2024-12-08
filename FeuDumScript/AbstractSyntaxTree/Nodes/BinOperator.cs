@@ -1,5 +1,6 @@
-﻿
-namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
+﻿using FeuDumScript.Program;
+
+namespace FeuDumScript.AbstractSyntaxTree.Nodes
 {
     internal class BinOperator : Node
     {
@@ -16,10 +17,10 @@ namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
             RightNode = rightNode;
         }
 
-        public override object? Run(List<Variable> variables)
+        public override object? Run(FeuDumScriptProgram program)
         {
-            var leftResult = LeftNode.Run(variables);
-            var rightResult = RightNode.Run(variables);
+            var leftResult = LeftNode.Run(program);
+            var rightResult = RightNode.Run(program);
             switch (Operator)
             {
                 case "+":

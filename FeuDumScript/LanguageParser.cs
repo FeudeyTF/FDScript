@@ -1,9 +1,9 @@
-﻿using FeuDumScript.Exceptions;
+﻿using FeuDumScript.AbstractSyntaxTree;
+using FeuDumScript.AbstractSyntaxTree.Nodes;
+using FeuDumScript.Exceptions;
 using FeuDumScript.Lexer;
-using FeuDumScript.Parser.AbstractSyntaxTree;
-using FeuDumScript.Parser.AbstractSyntaxTree.Nodes;
 
-namespace FeuDumScript.Parser
+namespace FeuDumScript
 {
     public class LanguageParser
     {
@@ -111,7 +111,7 @@ namespace FeuDumScript.Parser
             return new FunctionCallNode(name, args);
         }
 
-        private HeadNode ParseCode()
+        internal HeadNode ParseCode()
         {
             HeadNode head = new();
             while(_position < _tokens.Count)
@@ -121,13 +121,6 @@ namespace FeuDumScript.Parser
                 head.Nodes.Add(lineNode);
             }
             return head;
-        }
-
-        public int RunCode()
-        {
-            List<Variable> variables = [];
-            var parsed = ParseCode();
-            return (int)parsed.Run(variables);
         }
 
         private LexerToken? GetNextToken(params List<LexerTokenType> requirements)

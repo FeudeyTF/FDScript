@@ -1,6 +1,7 @@
 ﻿using FeuDumScript.Lexer;
+using FeuDumScript.Program;
 
-namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
+namespace FeuDumScript.AbstractSyntaxTree.Nodes
 {
     internal class NumberNode : Node
     {
@@ -11,7 +12,7 @@ namespace FeuDumScript.Parser.AbstractSyntaxTree.Nodes
             Number = number;
         }
 
-        public override object? Run(List<Variable> variables)
+        public override object? Run(FeuDumScriptProgram program)
         {
             return int.Parse(Number.Value);
         }
